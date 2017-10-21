@@ -1,0 +1,79 @@
+#include <iostream>
+using namespace std;
+
+class big_data {
+public:
+	int size;
+	int * big_array;
+	big_data() { size = 0; big_array = nullptr; }
+	big_data(int k) { size = k; big_array = new int[k]; }
+	~big_data() { delete[] big_array; } //destructor
+
+										//copy constructor -- left ref copy constructor
+	big_data(const big_data &D) {
+		cout << " copy consturctor is invoked" << endl;
+		size = D.size;
+		big_array = new int[size];
+		for (int i = 0; i < size; i++) { big_array[i] = D.big_array[i]; }
+	}
+
+	//move construtor  -- right ref copy constructor
+	big_data(big_data &&D) { //no const // Move is about transferring ownership
+		cout << " move consturctor is invoked" << endl;
+		size = D.size;
+		big_array = D.big_array;
+		D.big_array = nullptr;
+	}
+
+
+	big_data three_times() {
+		big_data temp;
+		temp.size = size;
+		temp.big_array = new int[size];
+		for (int i = 0; i < size; i++) temp.big_array[i] = 3 * big_array[i];
+		return move(temp);
+	}
+
+	void operator=(big_data &&D) {
+		cout << " right ref operator= is invoked" << endl;
+		size = D.size;
+		big_array = D.big_array;
+		D.big_array = nullptr;
+		//return *this;
+	}
+	void operator=(big_data &D) {
+		cout << " left ref operator= is invoked" << endl;
+		size = D.size;
+		big_array = new int[size];
+		for (int i = 0; i < size; i++) big_array[i] = D.big_array[i];
+		//return *this;
+	}
+
+	void print() {
+		for (int i = 0; i < size; i++) cout << big_array[i] << " ";
+		cout << endl;
+	}
+
+};
+
+int main() {
+	big_data D1(20);
+	for (int i = 0; i < D1.size; i++) D1.big_array[i] = rand() % 10;
+	D1.print();
+	big_data D3 = D1;//will invoke copy constructor
+	D3.print();
+	big_data D2;
+	D2 = D1; //will not invoke copy constructor, left ref version invoked
+	//D2.operator=(D1), right ref version invoked
+	D2.print();
+	big_data D4;
+	D4 = D1.three_times();
+	big_data D5 = move(D1); // invoking move constructor
+	//D4.operator=(D1.three_times());
+	D4.print();
+
+
+	getchar();
+	getchar();
+	return 0;
+}

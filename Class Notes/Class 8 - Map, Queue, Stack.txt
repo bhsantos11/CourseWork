@@ -1,0 +1,120 @@
+#include <iostream>
+#include <map>
+#include <list>
+#include <string>
+#include <queue>
+#include <stack>
+
+using namespace std;
+class course {
+public:
+	string name;
+	int section;
+	int credits;
+	course(string n, int s, int c) { name = n; section = s; credits = c; }
+	course(){}
+	bool operator<(course c) {
+		//return (credits < c.credits);
+		return (name < c.name);
+
+	}
+};
+
+int main() {
+
+	map<int, string> m1; //key-vlaue pair
+	m1[21] = "Dave";
+	cout << m1[21] << endl;
+	m1[99] = "Pat";
+	m1[17] = "John";
+
+
+
+
+	map<int, string>::iterator it1 = m1.begin();//it1 points to the first element of m1
+
+	while (it1 != m1.end()) {
+		cout << it1->first << " " << it1->second << endl;
+		it1++;
+	}
+
+	it1 = m1.find(21);
+	if (it1!= m1.end())  m1.erase(it1);
+	//m1.erase(21); alternatively.
+
+
+	course c1("CSE283", 1, 3), c2("WRT105", 8, 3), c3("MAT295", 6, 4), c4("PSY205", 7, 3);
+	list<int> LI = { 31, 24, 11, 17 };
+	list<int>::iterator it3 = LI.begin();
+	while (it3 != LI.end()) {
+		cout << *it3 << "  ";
+		it3++; //it3 = it3 +1; syntax error
+		//For list, only int3++ , it3--, ++it3, --it3 are allowed
+	}
+	cout << endl;
+	LI.sort();
+	it3 = LI.begin();
+	while (it3 != LI.end()) {
+		cout << *it3 << "  ";
+		it3++; //it3 = it3 +1; syntax error
+			   //For list, only int3++ , it3--, ++it3, --it3 are allowed
+
+	}
+
+
+
+
+	list<course> LC = { c3,c2,c1,c4 };
+	LC.sort();
+
+	list<course>::iterator it4 = LC.begin();
+	while (it4 != LC.end()) {
+		cout << it4->name << " " << it4->section << " " << it4->credits << endl;
+		it4++;
+	}
+
+
+
+
+
+	map<int, list<course>> DB;
+	list<course> L1;
+	DB[111] = L1;//add a student
+	DB[111].push_back(c2);//add a course c2 to student with ID = 111
+	DB[111].push_front(c4);
+
+	//map<int, list<course>>::iterator it2
+
+
+	queue<int> Q1; // error to initialize  = { 1,2,3 };
+	Q1.push(1);
+	Q1.push(2);
+	Q1.push(3);
+	cout << Q1.front() << endl;
+	Q1.pop();//the first (or front) item is removed.
+	//One can only access the first item, rather than any item inside through iterator
+	cout << Q1.front() << endl;
+
+	stack<int> S1;
+	S1.push(1);
+	S1.push(2);
+	S1.push(3);
+	cout << S1.top() << endl;//top() return the top element
+	S1.pop(); //remove the top element in stack
+
+
+
+
+
+
+
+
+	getchar();
+	getchar();
+	return 0;
+
+
+
+
+
+}

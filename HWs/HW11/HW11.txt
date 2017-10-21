@@ -1,0 +1,78 @@
+/*
+HW11  Due: 11:59PM, April  21, Friday
+
+Introduce thread(s) to your code to speed up the program.
+You need to generate an input_data.txt with 800,000 random integers and report time run time when using thread(s).
+You need to run the program for 5 different test cases and show the run time for each of them and the un-threaded version.
+Your runs time should exclude the data generation part.*/
+
+#include<iostream>
+#include<vector>
+using namespace std;
+
+void quick_sort(vector<int> &v1, int i, int j);
+void main()
+{
+	vector<int> v = { 4, 3, 7, 11, 2, 6, 5 };
+	quick_sort(v, 0, 6);
+	for (int w = 0; w<7; w++) cout << v[w] << "   ";
+	vector<int> vv(100);
+	for (int w = 0; w<100; w++) vv[w] = 2 * (100 - w);
+	quick_sort(vv, 0, 99);
+	cout << "\n\n";
+	for (int w = 0; w<100; w++) cout << vv[w] << "   ";
+	getchar();
+	return;
+
+}
+
+void quick_sort(vector<int> &v1, int b, int e)
+{
+	if (b == e) return;
+	vector<int> v_temp(v1);
+	int l = b, u = e;
+	for (int k = b + 1; k <= e; k++)
+	{
+		if (v1[k] < v1[b]) { v_temp[l] = v1[k]; l++; }
+		else { v_temp[u] = v1[k]; u--; }
+	}
+	v_temp[l] = v1[b];
+	for (int k = b; k <= e; k++) v1[k] = v_temp[k];
+	if ((l - b > 1)) quick_sort(v1, b, l - 1);
+	if ((e - u >1)) quick_sort(v1, u + 1, e);
+	return;
+}
+
+
+//The following code show a way to measure run time for a program.
+
+
+#include <iostream>
+#include <assert.h>
+#include <time.h>
+using namespace std;
+
+
+int main() {
+	//int t1, t2;
+	int j=0;
+	clock_t start, stop;
+double t = 0.0, t2;
+
+	/* Start timer */
+	assert((start = clock())!=-1);
+	//where threading code goes in
+	/*for (int i=0; i<10000000; i++) { example function to measure time
+	j += 2;
+}*/
+
+
+	/* Stop timer */
+    stop = clock();
+t2 = (double) (stop-start)/CLOCKS_PER_SEC;
+cout << "\nRun time = "  << t2 << " sec. \n";
+
+getchar();
+getchar();
+return 0;
+}

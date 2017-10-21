@@ -1,0 +1,88 @@
+#include <iostream>
+using namespace std;
+
+
+class node {
+public:
+	int value;
+	node * next;
+	node(int i) { value = i; next = nullptr; }
+	node() { next = nullptr; }
+};
+
+class linked_list {
+public:
+	int num_nodes;
+	node * head;
+	linked_list() { num_nodes = 0; head = nullptr; }
+	void make_random_list(int k);
+	void print_linked_list();
+	void reverse();
+	void sort();
+};
+void linked_list::make_random_list(int k) {
+	node * p;
+	for (int i = 0; i < k; i++) {
+		p = new node(rand() % 100);
+		p->next = head;
+		head = p;
+		num_nodes++;
+	}
+}
+
+void linked_list::reverse() {
+	if (num_nodes <= 1) return;
+	node * p1 = head, * p2= p1->next, *p3;
+	while (p2 != nullptr) {
+		p3 = p2->next; //p3 can be nullptr, p3 is being used to track what p2 will have to work on next
+		// or p3 holds the node whose 'next' pointer is to be reversed next
+		p2->next = p1; // Actualy pointer reversing
+		if (p1 == head) p1->next = nullptr; // Final node
+		p1 = p2; // p1 moving on node foward to the node that p2's 'next' will be redefined to point to
+		p2 = p3; // p2 moving one node forward, this is why we defined p3 as 'p2->next' before
+		// Because now we can't access the next node to be reversed by p2->next because on line 39 it
+		// 	got reversed
+	}
+	head = p1;
+}
+
+
+void linked_list::print_linked_list() {
+	node * p = head;
+	cout << endl;
+	while (p != nullptr) {
+		cout << p->value << " ";
+		p = p->next;
+	}
+}
+
+void linked_list::sort() {
+	if (num_nodes <= 1) return;
+	node * p1 = head, *p2;
+	while (p1 != nullptr) {
+		int min = p1->value;
+		node * p_min = p1;
+		p2 = p1->next;
+		while (p2 != nullptr) {
+			if (p2->value < min) { min = p2->value; p_min = p2; }
+			p2 = p2->next;
+		}
+		p_min->value = p1->value;
+		p1->value = min;
+		p1 = p1->next;
+	}
+}
+int main() {
+
+		linked_list L1;
+		L1.make_random_list(10);
+		L1.print_linked_list();
+		L1.reverse();
+		L1.print_linked_list();
+		L1.sort();
+		L1.print_linked_list();
+		getchar();
+		getchar();
+		return 0;
+
+	}

@@ -1,0 +1,65 @@
+left ref and right ref
+
+void fuc (int &a) ...  //left ref
+
+Whateven that can appear on the left sife of an assignment is considered left ref.
+Else, it is right right ref.
+
+int i;
+i = 10;
+int j;
+j = i;
+
+i+5 can only appears on right side; thus, it is right ref.
+25 is right ref.
+
+//the concept of const
+
+const int i = 10;
+
+int j = 20;
+
+const int * p = &j;
+// this can be equivalent written as
+//int const *p = &j;
+//*p is const
+//*p = 60;//error
+
+int * const p = &j;
+//*p is not const but p is const
+//p = &k;//error because p is const.
+//*p = 250;
+
+
+const int * const p = &j;
+//both *p and p are const.
+
+
+int fun1(const int &i) {
+
+}
+
+#include <iostream>
+
+using namespace std;
+
+int func1(int &i) { //left ref
+	i++;
+	return i*i;
+}
+
+int func1(int &&i) { //right ref
+	i--;
+	return i*i;
+}
+
+int main() {
+	int i = 10;
+	int j = 21;
+	cout << func1(i) << endl; //will invoke left ref version
+	cout << func1(j-1) << endl; //will invoke right ref version
+
+	getchar();
+	getchar();
+	return 0;
+}

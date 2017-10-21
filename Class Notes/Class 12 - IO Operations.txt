@@ -1,0 +1,28 @@
+//File I/O operations
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main() {
+
+	int i = 10;
+	string s = "Interesting";
+
+	ofstream out("data1.txt");
+
+	out << i  <<" " << s << endl;
+
+	out.close();
+
+	ifstream in("data1.txt");
+	int j;
+	string s1;
+	in >> j >> s1;
+	cout << j << " " << s1;
+	in.close();
+	getchar();
+	getchar();
+	return 0;
+
+}

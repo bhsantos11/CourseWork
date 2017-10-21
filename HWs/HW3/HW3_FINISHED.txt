@@ -1,0 +1,260 @@
+//CSE283 HW3 Sparse Matrix Operations
+//Spring 2917
+//Due: 11:59pm Friday, Feb. 10
+
+//You need to complete the implementation for member funcitons add_element, operator+, and operator*.
+//Feel free to modify my code to fit your need.
+//You need to try sufficient test cases in main function.
+
+//The following are the three matrices for you to try.
+//10 1 1 25 1 3 50 2 2 80 3 2 100 3 3             For m1:  3 rows, 3 columns, 5 elements
+
+//-1 1 3 -1 1 4 1 2 2 2 3 1 1 3 2 1 3 4           For m2: 3 rows, 4 columns, 6 elements
+
+//-10 1 1 20 1 2 20 2 1 30 3 2			  For m4: 3 rows, 3 columns, 4 elements
+
+
+//Partial code written by C-Y (Roger) Chen
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+class node {
+public:
+	int value;
+	int r_pos;
+	int c_pos;
+	node *r_next;
+	node *c_next;
+	node() { r_next = nullptr; c_next = nullptr; }
+	node(int v, int r, int c) { value = v; r_pos = r; c_pos = c; r_next = nullptr; c_next = nullptr; }
+};
+
+class my_matrix {
+public:
+	string m_name;
+	int num_rows;
+	int num_cols;
+	int num_elements;
+	vector<node *> r_vec; // Collection of the head of every rows
+	vector<node *> c_vec;
+	my_matrix() {};
+	my_matrix operator+(my_matrix m);
+	my_matrix operator*(my_matrix m);
+	void matrix_input();
+	void matrix_print_r();
+	void matrix_print_c();
+	void add_element(int v, int r, int c);
+};
+
+void my_matrix::add_element(int v, int r, int c) {
+	node * p1 = r_vec[r];
+	node * p2 = c_vec[c];
+	node * p3 = new node(v, r, c);
+	node * p4; // Temp node to keep track of previous
+
+
+	// ROW VECTOR
+	if (p1 == nullptr) { // In case there are no elements in this row yet
+		p1 = p3;
+		return;
+	}
+
+	else if (p3->c_pos < p1->c_pos) p3->c_next = p1; // Case where node should be first element
+
+	while (p1 != nullptr) {
+		p4 = p1;
+		p1 = p1->c_next;
+
+		if (p3->c_pos < p1->c_pos) { // Inserting p3 right before p1 //Also can't I just keep this inside the loop?
+			p4->c_next = p3;
+			p3->c_next = p1;
+			return;
+		}
+
+	}//end of while loop
+
+
+	// COLLUMN VECTOR
+
+	if (p2 == nullptr) {// In case there are no elements in this collumn yet
+		p2 = p3;
+		return;
+	}
+
+	else if (p3->c_pos < p2->c_pos) {// Case where node should be first element
+		p3->c_next = p2;
+		return;
+	}
+
+	while (p2 != nullptr) {
+		p4 = p2;
+		p2 = p2->c_next;
+
+		if (p3->c_pos < p2->c_pos) { // Inserting p3 right before p2  //Also can't I just keep this inside the loop?
+			p4->c_next = p3;
+			p3->c_next = p2;
+			return;
+		}
+
+	} //end of while loop
+
+
+}
+
+
+void my_matrix::matrix_input() {
+	int v, r, c;
+	string s;
+	cout << "Enter Matrix name, number of rows, number of columns, separated by space: \n";
+	cin >> m_name >> num_rows >> num_cols;
+	r_vec.assign(num_rows, nullptr);
+	c_vec.assign(num_cols, nullptr);
+	cout << "\nEnter number of elements:\n";
+	cin >> num_elements;
+	cout << "\nEnter elements: value, row, col, separated by space:\n";
+	for (int i = 0; i < num_elements; i++) { cin >> v >> r >> c; add_element(v, r, c); }
+}
+
+
+void my_matrix::matrix_print_r() {
+
+	int i;
+	node *p1;
+	for (i = 0; i < num_rows; i++) {
+		p1 = r_vec[i];
+		while (p1 != nullptr) { cout << "( " << p1->value << " , " << p1->r_pos << " , " << p1->c_pos << " )"; p1 = p1->r_next; }
+	}
+
+
+}
+
+void my_matrix::matrix_print_c() {
+
+	int i;
+	node *p1;
+	for (i = 0; i < num_cols; i++) {
+		p1 = c_vec[i];
+		while (p1 != nullptr) { cout << "( " << p1->value << " , " << p1->r_pos << " , " << p1->c_pos << " )"; p1 = p1->c_next; }
+	}
+
+
+}
+
+my_matrix my_matrix::operator*(my_matrix m) {
+	my_matrix m1;
+
+	if (num_cols != m.num_rows) {
+		cout << "Matrixes format incompatible" << endl;
+		return m1;
+	}
+	if (m.num_elements == 0 || num_elements == 0) { return m1; }
+
+	node * p1 = r_vec[0]; // 0,0 element
+	node * p2 = m.r_vec[0]; // 0,0 element
+
+
+	int c_size = r_vec.size; // Assuming matrices follow the (2X3 & 3X2) format
+	int r_size = m.c_vec.size;
+
+	// Creating the new vector to be returned
+
+	m1.r_vec.assign(r_size, nullptr);
+	m1.c_vec.assign(c_size, nullptr);
+
+
+	for (int i = 0; i < c_size; i++) {
+
+		for (int j = 0; j < c_size; j++) {
+			p1 = r_vec[i];
+			p2 = m.c_vec[j];
+			int inner_product = 0;
+			while (p1 != nullptr && p2 != nullptr) {
+				//if (p1 == nullptr &&p2 == nullptr) break;
+
+				if (p1->c_pos < p2->r_pos) {
+					p1 = p1->r_next;
+				}
+				else if (p1->c_pos > p2->r_pos) {
+					p2 = p2->c_next;
+				}
+				else if (p1->c_pos == p2->r_pos) {
+					inner_product += p1->value * p2->value;
+					p1 = p1->r_next;
+					p2 = p2->c_next;
+				}
+			}
+			if (inner_product != 0) {
+				m1.add_element(inner_product, i, j);
+				m1.num_elements++;
+			}
+		}
+	}
+
+	return m1;
+}
+
+my_matrix my_matrix::operator+(my_matrix m) {
+
+	node * p1 = r_vec[0]; // 0,0 element
+	node * p2 = m.r_vec[0]; // 0,0 element
+
+	int r_size = r_vec.size;
+	int c_size = c_vec.size; // Assuming matrices both have the same number of rows and columns
+
+	// Creating the new vector to be returned
+	my_matrix m1;
+	m1.r_vec.assign(r_size, nullptr);
+	m1.c_vec.assign(c_size, nullptr);
+
+	for (int i = 0; i < r_vec.size; i++) { // Row iteration
+		p1 = r_vec[i];
+		p2 = m.r_vec[i];
+
+		if (p1 != nullptr && p2 != nullptr) { // In case rows has no element
+			for (int z = 0; z < c_vec.size; z++) { // Column iteration
+				int value = p1->value + p2->value;
+				m1.add_element(value, i, z);
+				p1 = p1->c_next;
+				p2 = p2->c_next;
+			} // end of column for loop
+		}
+	} // end of row for loop
+
+
+
+}
+int main() {
+
+	my_matrix m1, m2, m3, m4, m5;
+	m1.matrix_input();
+	m1.matrix_print_r(); //row-oriented printing
+	cout << "\n";
+	m1.matrix_print_c(); //column-oriented printing
+	cout << "\n";
+
+	m2.matrix_input();
+	m2.matrix_print_r();
+	cout << "\n";
+	m2.matrix_print_c();
+	m3 = m1*m2;
+	cout << "\n";
+	m3.matrix_print_r();
+	cout << "\n";
+	m3.matrix_print_c();
+	cout << "\n";
+	m4.matrix_input();
+	m4.matrix_print_r();
+	cout << "\n";
+	m4.matrix_print_c();
+	m5 = m1 + m4;
+	cout << "\n";
+	m5.matrix_print_r();
+	cout << "\n";
+	m5.matrix_print_c();
+
+	getchar();
+	getchar();
+	return 0;
+}

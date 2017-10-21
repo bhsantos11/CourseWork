@@ -1,0 +1,21 @@
+// PROBLEM 5
+
+class tree_node {
+public:
+    int value;
+    tree_node * left_child;
+    tree_node * right child;
+}
+
+int tree_evaluation (tree_node *p){
+    switch(p->value){
+        case -1:
+            return tree_evaluation(left_child) * tree_evaluation(right_child);
+        case -2:
+            return tree_evaluation(left_child) - tree_evaluation(right_child);
+        case -3:
+            return tree_evaluation(left_child) + tree_evaluation(right_child);
+        default:
+            return p->value;
+    }
+}

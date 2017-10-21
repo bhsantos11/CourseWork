@@ -1,0 +1,19 @@
+// PROBLEM 3
+void remove_even(){
+
+    while((head->value % 2) == 0){ // meaning head is even
+        head = head->next;
+    }
+
+    node * p, *p1;
+    p = head;
+    while(p != nullptr){
+        p1 = p->next;
+        if((p1->value % 2) == 0){ // meaning our p is even
+            p->next = p1->next; // This makes it so our node is no longer there
+            delete * p1;
+        }
+        p = p->next; // move p forward by one
+    }// end of while
+
+}

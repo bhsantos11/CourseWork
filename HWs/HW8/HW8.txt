@@ -1,0 +1,96 @@
+HW8:  Write 2 programs for Problem 4 and Problem 5 of the exam.
+Due: 11:59PM, Friday (3/31)
+
+
+//PROBLEM 4
+#include <iostream>
+#include <list>
+#include <vector>
+#include <map>
+using namespace std;
+void print_DB(list<list<int>> &DB);
+void DB_to_DB1(list<list<int>> &DB, vector<vector<int>> &DB1);
+void print_DB1(vector<vector<int>> &DB1);
+void DB_to_DB5(list<list<int>> &DB, vector<list<int> *> &DB5);
+void print_DB5(vector<list<int> *> &DB5);
+
+
+//********  PROBLEM 4 ***************************
+//Write code for the following two functions
+void DB5_to_DB6(vector<list<int> *> &DB5, list<vector<int> *> &DB6);
+void print_DB6(list<vector<int> *> &DB6);
+//**********************************************
+
+int main() {
+
+	list< list<int> > DB = { { 2,3,4 },{ 11,15 },{ 4,6,8,11,5 } };
+	print_DB(DB);
+
+
+	vector<list<int> *> DB5;
+
+	DB_to_DB5(DB, DB5);
+	print_DB5(DB5);
+
+	list<vector<int> *> DB6;
+
+	getchar();
+	getchar();
+	return 0;
+
+}
+
+
+
+
+
+
+
+
+
+//PROBLEM 5
+#include <iostream>
+using namespace std;
+
+class node {
+public:
+	int value;
+	node * next;
+	node() { next = nullptr; }
+	node(int v) { value = v; next = nullptr; }
+};
+class linked_list {
+public:
+	int num_nodes;
+	node * head;
+	linked_list() { num_nodes = 0; head = nullptr; }
+	void make_random_linked_list(int k);
+
+	//***********   PROBLEM 5   ***********************************************
+	//Wrire code for member function remove_all;
+	void remove_all(int k); //Remove all nodes with value k
+	//*************************************************************************
+
+};
+void linked_list::make_random_linked_list(int k) {//This member function creaates a linked list
+												  //of k nodes with each node having a random value between 0 and 99
+	node * p;
+	for (int i = 0; i < k; i++) {
+		p = new node(rand() % 30);//create a new node with random value between 0 and 29
+		p->next = head;
+		head = p;
+		num_nodes++;
+
+	}
+}
+
+int main() {
+
+	linked_list L;
+	L.make_random_linked_list(1000);
+	L.remove_all(17);
+	getchar();
+	getchar();
+	return 0;
+
+}

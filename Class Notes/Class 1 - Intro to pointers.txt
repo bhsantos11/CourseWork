@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+class three_D {
+public:
+	int ht;
+	int wid;
+	int dep;
+	//constructor
+	three_D() { ht = wid = dep = 0; }
+	three_D(int i) { ht = wid = dep = i; }
+	three_D(int i, int j, int k) { ht = i; wid = j; dep = k; }
+	int vol() { return ht*wid*dep; }
+};
+
+int main() {
+	//data type: the same for C, C++, Java
+	//int, char, short, long, float, double
+	//control statement: the same for C, C++, Java
+	//if, else, for, while, switch
+
+	int i, j = 10;
+	
+	char c = 't';
+
+	cout << j << " " << c << " \n";
+	three_D t1, t2(3), t3(3,4,5);
+	
+	cout << t1.ht << " " << t2.dep << " " << t3.wid << " " << t3.vol() <<endl;
+	
+	int * p = & j; //declare p to be a pointer to j; its value is
+	//the address of j
+	cout << *p << " " << j << endl;
+	//*p return the value of the location pointed by p
+	//this is referred to as dereference
+	*p = 100; //the same as j = 100;
+
+	char * p1 = &c;
+	//char *p1; char* p1;
+	int * p2, *p3;
+	//int ***i;
+
+	p1++;
+	cout << *p1 << endl;
+
+
+	int A[5] = { 10, 20, 30, 40, 50 };
+	cout << *A << endl; 
+	//Array name without index represents the address of the first
+	//element of the array
+	//A is the same as &A[0]
+	int * p5 = A;
+	for (int i = 0; i < 5; i++) {
+
+		//cout << A[i] << " ";
+		cout << *p5 << " ";
+		p5++;
+		//alternatively, we can combine the above two into
+		//cout << *(p5+i) <<" ";
+
+	}
+	int * B = new int;//new is function which allocates a memory location
+	//of the type specified and returns the address of this location
+	*B = 100;
+	*(B + 1) = 200;
+	*(B + 2) = 300;
+	cout << B[0] << " " << B[1] << " " << B[2] << endl;
+	getchar();
+	getchar();
+	return 0;
+	
+}

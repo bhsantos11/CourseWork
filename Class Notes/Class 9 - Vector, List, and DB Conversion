@@ -1,0 +1,103 @@
+#include <iostream>
+#include <vector>
+#include <list>
+using namespace std;
+
+void DB1_to_DB2(vector<list<int>> &DB1, list<vector<int>> &DB2);
+void print_DB1(vector<list<int>> &DB1);
+void print_DB2(list<vector<int>> &DB2);
+void DB2_to_DB3(list<vector<int>> &DB2, vector<list<int>> &DB3);
+void DB1_to_DB4(vector < list<int> > &DB1, list<vector<int> *> &DB4);
+void print_DB4(list<vector<int> *> &DB4);
+int main() {
+	vector<list<int>> DB1 = { {1,2,3}, {4,5}, {6,7,8,9} , {10,11} };
+	print_DB1(DB1);
+	list<vector<int>> DB2;
+	DB1_to_DB2(DB1, DB2);
+	print_DB2(DB2);
+
+	vector<list<int>> DB3;
+	DB2_to_DB3(DB2, DB3);
+	print_DB1(DB3);
+	list<vector<int> *> DB4;
+	DB1_to_DB4(DB1, DB4);
+	print_DB4(DB4);
+
+	getchar();
+	getchar();
+	return 0;
+}
+void DB1_to_DB2(vector<list<int>> &DB1, list<vector<int>> &DB2) {
+	list<int>::iterator it1;
+	for (size_t i = 0; i < DB1.size(); i++) {
+		vector<int> v;
+		it1 = DB1[i].begin();
+		while (it1 != DB1[i].end()) {
+			v.push_back(*it1);
+			it1++;
+		}
+		DB2.push_back(v);
+	}
+}
+void print_DB1(vector<list<int>> &DB1) {
+	list<int>::iterator it1;
+	for (size_t i = 0; i < DB1.size(); i++) {
+		it1 = DB1[i].begin();
+		while (it1 != DB1[i].end()) {
+			cout << *it1 << " ";
+			it1++;
+		}
+		cout << endl;
+	}
+
+}
+
+void print_DB2(list<vector<int>> &DB2) {
+	list<vector<int>>::iterator it1 = DB2.begin();
+	while (it1 != DB2.end()) {
+		for (size_t i = 0; i < it1->size(); i++) {
+			cout << (*it1)[i] << " ";
+		}
+		cout << endl;
+		it1++;
+	}
+
+
+}
+
+void DB2_to_DB3(list<vector<int>> &DB2, vector<list<int>> &DB3) {
+	list<vector<int>>::iterator it1 = DB2.begin();
+	while (it1 != DB2.end()) {
+		list<int> L;
+		for (size_t i = 0; i< it1->size(); i++) {//(*it1).size()
+			L.push_back((*it1)[i]);
+		}
+		DB3.push_back(L);
+		it1++;
+	}
+}
+
+void DB1_to_DB4(vector < list<int> > &DB1, list<vector<int> *> &DB4) {
+
+	for (size_t i = 0; i < DB1.size(); i++) {
+		vector<int> * p = new vector<int>;
+		list<int>::iterator it1 = DB1[i].begin();
+		while (it1 != DB1[i].end()) {
+			p->push_back(*it1);
+			it1++;
+		}
+		DB4.push_back(p);
+	}
+
+}
+
+void print_DB4(list<vector<int> *> &DB4) {
+	list<vector<int> *>::iterator it1 = DB4.begin();
+	while (it1 != DB4.end()) {
+		for (size_t i = 0; i < (*it1)->size(); i++) {
+			cout << (*(*it1))[i] << " ";
+		}
+		cout << endl;
+		it1++;
+	}
+}

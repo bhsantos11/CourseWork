@@ -1,0 +1,3 @@
+﻿  Source.cpp
+c:\users\bernardo\google drive\syracuse\cse 283\hws\hw10\hw10\hw10\source.cpp(100): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+LINK : fatal error LNK1168: cannot open C:\Users\Bernardo\Google Drive\Syracuse\CSE 283\HWs\HW10\HW10\Debug\HW10.exe for writing

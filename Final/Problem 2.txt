@@ -1,0 +1,28 @@
+// PROBLEM 2
+#include <iostream>
+#include <vector>
+#include <list>
+#include <stack>
+using namespace std;
+
+void stack_to_pvector(stack<int> s, vector<int> * p){
+    // Because we are not taking s by reference, the changes made to s here
+    //      will not affect the stack being given
+
+    int x = s.size();
+    (*p).resize(x); // makes our vector the same size as the stack
+
+    for(int i = x; i > 0; i--){
+        (*p)[i] = s.top();
+        s.pop();
+    }
+
+}
+
+int main(){
+    stack<int> s({ 1,2,3,4 });
+
+    vector<int> * v = new vector<int>;
+
+
+}

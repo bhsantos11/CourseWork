@@ -1,0 +1,64 @@
+list<list<int> > DB1;
+vector<vector<int> *> DB2;
+
+void print_DB1(list<list<int>> &DB1);
+void print_DB2(vector<vector<int> *> &DB2);
+void DB1_to_DB2(list<list<int>> &DB1, vector<vector<int> *> &DB2);
+void DB2_to_DB1(vector<vector<int> *> &DB2, list<list<int>> &DB1);
+
+void print_DB1(list<list<int>> &DB1){
+  list<list<int>>::iterator it1 = DB1.begin();
+
+  while(it1 != DB1.end()){ // outer list loop
+    list<int>:: iterator it2 = (*it1).begin();
+
+    while(it2 != (*it1).end()){ // inner list loop
+      cout << *it2 << ' ';
+      it2++;
+    }
+
+    it1++;
+  } // end of outer while loop
+
+}
+
+void print_DB2(vector<vector<int> *> &DB2){
+  vector<vector<int> *>::iterator it1 = DB2.begin();
+  while(it1 != DB2.end()){ // outer loop
+    vector<int>::iterator it2 = (*it1)->begin();
+    while(it2 != (*it1)->end()){ // inner loop
+      cout << *it2 << ' ';
+      it2++;
+    }
+    it1++;
+  } // end of outer loop
+}
+
+void DB1_to_DB2(list<list<int>> &DB1, vector<vector<int> *> &DB2){
+  list<list<int>>:: iterator it1 = DB1.begin();
+  while(it1 != DB1.end()){
+    vector<int> * p = new vector<int>; // This pointer will get pushed into the outter vector of DB2
+    list<int>::iterator it2 = it1->begin();
+    while(it2 != it1->end()){ // Inner list loop
+      p->push_back(*it2);
+      it2++;
+    } // end of inner list loop
+    DB2.push_back(p);
+    it1++;
+  }// end of outer list loop
+}
+
+void DB2_to_DB1(vector<vector<int> *> &DB2, list<list<int>> &DB1){
+  vector<vector<int> *>::iterator it1 = DB2.begin(); // it1 is iterator pointing to pointer
+  while(it1 != DB2.end()){ // outer loop
+    vector<int>::iterator it2 = (*it1)->begin();
+    list<int> l;
+    while(it2 != (*it1)->end()){
+      l.push_back(*it2);
+      it2++;
+    }
+    DB1.push_back(l);
+    it1++;
+  }// end of outter loop
+
+}

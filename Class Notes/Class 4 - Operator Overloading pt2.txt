@@ -1,0 +1,72 @@
+//Quiz #1 2017_01_26 CSE283 Spring
+#include <iostream>
+using namespace std;
+class ThreeD {
+public:
+	int ht;
+	int wid;
+	int dep;
+	ThreeD(int i, int j, int k) { ht = i; wid = j; dep = k; }
+	ThreeD() { ht = wid = dep = 0; }
+	ThreeD operator+(ThreeD &t) {
+		ThreeD temp;
+		temp.ht = ht + t.ht;
+		temp.wid = wid + t.wid;
+		temp.dep = dep + t.dep;
+		return temp;
+	}
+	ThreeD operator++();//prefix; no argument
+	ThreeD operator++(int never_used);//postfix; one int argument
+	int & operator[](int k);//return int variable (or reference) rather than returning an int value
+
+	//postfix
+};
+ThreeD ThreeD::operator++() {
+	ht++;
+	wid++;
+	dep++;
+	return *this;//this is a pointer pointing to the current object
+
+}
+
+ThreeD ThreeD::operator++(int never_used) {
+	ThreeD temp = *this;
+	ht++;
+	wid++;
+	dep++;
+	return temp;
+
+}
+
+int & ThreeD::operator[](int k) {
+	switch (k) {
+	case 0: return ht;
+	case 1: return wid;
+	case 2: return dep;
+	}
+
+}
+	int main() {
+
+		ThreeD t1(3, 4, 5), t2(1, 2, 3), t3, t4, t5;
+		t3 = t1 + t2; //equivalent to t3 = t1.opeator+(t2);
+		++t3;//prefix ; unary operator
+		cout << t3.ht << " " << t3.wid << " " << t3.dep << endl;
+		//t5 = ++t3; //prefix; increment t3, then assign t3 values to t5
+		t4 = t3++;//postfix; assign value of t3 to t4, then increment t3
+		cout << t4.ht << " " << t4.wid << " " << t4.dep << endl;
+		cout << t3.ht << " " << t3.wid << " " << t3.dep << endl;
+
+		cout << t3[2];
+		t3[1] = 1000;//OK because the function returns a ref type
+
+		int w = 100;
+		int & x = w;//the same object now has two names
+		x = 100;//w is now also 100
+
+
+
+		getchar();
+		getchar();
+		return 0;
+	}

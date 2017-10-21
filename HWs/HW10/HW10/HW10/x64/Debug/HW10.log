@@ -1,0 +1,12 @@
+﻿  Source.cpp
+c:\users\bernardo\google drive\syracuse\cse 283\hws\hw10\hw10\hw10\source.cpp(100): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\bernardo\google drive\syracuse\cse 283\hws\hw10\hw10\hw10\source.cpp(121): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\bernardo\google drive\syracuse\cse 283\hws\hw10\hw10\hw10\source.cpp(122): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\bernardo\google drive\syracuse\cse 283\hws\hw10\hw10\hw10\source.cpp(123): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\bernardo\google drive\syracuse\cse 283\hws\hw10\hw10\hw10\source.cpp(124): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\bernardo\google drive\syracuse\cse 283\hws\hw10\hw10\hw10\source.cpp(155): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\bernardo\google drive\syracuse\cse 283\hws\hw10\hw10\hw10\source.cpp(156): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\bernardo\google drive\syracuse\cse 283\hws\hw10\hw10\hw10\source.cpp(157): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\bernardo\google drive\syracuse\cse 283\hws\hw10\hw10\hw10\source.cpp(158): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  HW10.vcxproj -> C:\Users\Bernardo\Google Drive\Syracuse\CSE 283\HWs\HW10\HW10\x64\Debug\HW10.exe
+  HW10.vcxproj -> C:\Users\Bernardo\Google Drive\Syracuse\CSE 283\HWs\HW10\HW10\x64\Debug\HW10.pdb (Partial PDB)

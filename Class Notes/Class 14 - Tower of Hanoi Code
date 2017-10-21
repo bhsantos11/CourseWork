@@ -1,0 +1,39 @@
+#include <iostream>
+#include <stack>
+
+using namespace std;
+
+
+void move(stack<int> s[], int, int, int, int);
+
+int main()
+{
+	int i, j, i1, j1;
+	stack<int> s[3];
+	int num_disks;
+	cout << "Enter the number of disks: \n";
+	cin >> num_disks;
+	for (i = 0; i<num_disks; i++) { s[0].push(num_disks - i); }
+	move(s, 0, 2, 1, num_disks);
+	getchar();
+	getchar();
+	return 0;
+}
+
+
+
+void move(stack<int> s[], int a, int b, int c, int num_disks) //move number_disks disks from a to b using c as temp.
+{
+	int i, j; // Why are these here?
+	if (num_disks == 1) {
+		s[b].push(s[a].top());
+		cout << "Move disk " << s[b].top() << " from " << a << " to " << b << "\n";
+		s[a].pop(); return;
+	}
+	move(s, a, c, b, num_disks - 1);
+	s[b].push(s[a].top());
+	cout << "Move disk " << s[b].top() << " from " << a << " to " << b << "\n";
+	s[a].pop();
+	move(s, c, b, a, num_disks - 1);
+
+} // end of func

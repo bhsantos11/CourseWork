@@ -1,0 +1,60 @@
+//Quiz 3 solution
+#include <iostream>
+#include <list>
+#include <map>
+#include <string>
+
+using namespace std;
+
+class course {
+public:
+	string name;
+	int section;
+	int credits;
+	course(string n, int s, int c) { name = n; section = s; credits = c; }
+	course(){}
+	bool operator<(course c) {
+		bool b;
+		if (credits < c.credits) b = true;
+		else if (credits == c.credits) { b = (name < c.name); }
+		else b = false;
+		return b;
+	}
+	bool operator==(course c) { return (name == c.name); }
+};
+
+int main() {
+	course c1("CSE283", 1, 3), c2("WRT105", 7, 3), c3("MAT295", 9, 4), c4("PSY205", 6, 3);
+	course c5("WRT205", 9, 3);
+	list<course> L1 = { c4,c3,c1 };
+	L1.push_back(c2);
+	map<int, course>M1 = { {11, c3}, {84, c1}, {33, c4} };
+	M1[12] = c2;
+	L1.sort();
+	list<course>::iterator it1 = L1.begin();
+	while (it1 != L1.end()) {
+		cout << it1->name << " " << it1->section << " " << it1->credits << endl;
+		it1++;
+	}
+	it1 = find(L1.begin(), L1.end(), c5);
+	if (it1 != L1.end()) { cout << it1->name; L1.erase(it1); }
+	L1.remove(c5);//no operation if c1 does not exist in L1.
+
+	cout << endl;
+	map<int, course>::iterator it2 = M1.begin();
+	while (it2 != M1.end()) {
+		cout << it2->first << " " << (it2->second).name << " " << (it2->second).section << " " << (it2->second).credits << endl;
+		it2++;
+	}
+
+	it2 = M1.find(84);
+	if (it2 != M1.end()) { cout << (it2->second).name;  M1.erase(it2); }
+
+	M1.erase(202);
+
+
+	getchar();
+	getchar();
+	return 0;
+
+}

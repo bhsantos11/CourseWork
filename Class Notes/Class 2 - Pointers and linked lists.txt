@@ -1,0 +1,93 @@
+#include <iostream>
+using namespace std;
+
+//call by value and call by reference
+//pass by value and pass by reference
+
+
+class node {
+public:
+	int value;
+	node * next;//next carries the address of a node
+
+	node() { next = nullptr; }//NULL was used instead of nullptr in older version
+	node(int i) { value = i; next = nullptr; }
+
+};
+
+void test(int i) { //call by value
+	//a new copy of i is produced and passed to the funciton
+	i++;
+	cout << i << endl;
+
+}
+void test1(int &j) {//call by ref.  The original copy is being used inside
+	//the funciton
+
+	j++;
+	cout << j << endl;
+}
+
+//how to pass array to a funciton
+void SUM1(int B[], int size)
+//void SUM1(int * B, int size)
+//void SUM1(int B[5], int size)
+{
+	int sum = 0;
+	for (int i = 0; i < size; i++)
+		sum += B[i];
+	cout << sum;
+	B[0]++;
+}
+
+int main() {
+	/*
+	int i = 10;
+	test(i);
+	cout << i << endl;
+	test1(i);
+	cout << i << endl;
+
+	int A[5] = { 2,4,6,8,9 };
+	SUM1(A, 5);
+	cout << A[0] << endl;
+
+
+
+
+	node * head, *tail;
+
+	node * n3;
+
+	n3 = new node(150);
+	tail = n3;
+	node * n2 = new node(200);
+	//(*n2).next = n3; a new notiation is intruduced below
+	n2->next = n3;
+	node * n1 = new node(100);
+	n1->next = n2;
+	head = n1;
+
+	*/
+	node * p;
+	node * head1= nullptr;
+	for (int i = 0; i < 10; i++) {
+		p = new node(i);
+		p->next = head1; //? What is this doing?
+		head1 = p;  //? Why would head1 have the value of p
+	}
+	p = head1;
+	while (p != nullptr) {
+		cout << p->value << " ";
+		p = p->next; // ? t
+	}
+
+
+	getchar();
+	getchar();
+	return 0;
+}
+
+/*My problem eith this is that I dont understand how the program is linking its parts.
+The loop starting at line 74 seems to be doing linking butI am unsure as to how
+I am also unsure of the usage of p*/

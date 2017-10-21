@@ -1,0 +1,55 @@
+#include <iostream>
+#include <mutex>
+#include <condition_variable>
+#include <vector>
+using namespace std;
+
+mutex m1;
+condition_variable cv1, cv2;
+vector<int> vec;
+//int round = 5;
+
+void get(int i) {
+	int k = 0;
+	unique_lock<mutex> ulock1(m1);
+	while (vec.size() < 10) cv1.wait(ulock1);
+	for (int j = 0; j < 10; j++) {
+		k += vec[j] * vec[j];
+	}
+	cout << " result = " << k << "  by get " << i << endl;
+	vec.clear();
+	cv2.notify_one();
+
+}
+
+void put(int i) {
+	unique_lock<mutex> ulock1(m1);
+	while (vec.size() == 10) cv2.wait(ulock1);
+	int j = rand() % 100 * i ;
+	vec.push_back(j);
+	cout << "put " << i << "  just added value " << j << "  to vec" << endl;
+	if (vec.size() == 10) cv1.notify_one();
+}
+
+
+int main() {
+
+	thread get_thread[3];
+	thread put_thread[20];
+	for (int i = 0; i < 3; i++) {
+		get_thread[i] = thread(get, i);
+	}
+	for (int i = 0; i < 20; i++) {
+		put_thread[i] = thread(put, i);
+	}
+
+	for (int i = 0; i < 3; i++) {
+		get_thread[i].join();
+	}
+	for (int i = 0; i < 20; i++) {
+		put_thread[i].join();
+	}
+	getchar();
+	getchar();
+	return 0;
+}

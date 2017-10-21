@@ -1,0 +1,17 @@
+#include <vector>
+#include <list>
+using namespace std;
+
+void DB2_to_DB1(vector<list<int> *> &DB2, list<vector<int> *> &DB1){
+    vector<list<int> *>::iterator it1 = DB2.begin();
+    while(it1 != DB2.end()){
+        list<int>::iterator it2 = (*it1)->begin(); // the * to dereference the iterator and the -> for the pointer
+        vector<int> * v = new vector<int>;
+        while(it2 != (*it1)->end()){
+            v->push_back(*it2);
+            it1++;
+        }
+        DB1.push_back(v);
+        it1++;
+    }// end of outer while
+}

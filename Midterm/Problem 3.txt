@@ -1,0 +1,19 @@
+void linked_list::swap_max_min(){
+  node * max = linked_list->head;
+  node * p = linked_list->head;
+
+  // first find max
+  while(p!=nullptr){
+    if(p->value > max->value) max = p;
+    p = p->next;
+  }
+
+  // iterate to make p point to last
+  p = linked_list->head;
+  while(p->next != nullptr) p = p->next;
+  // swap max and last
+  int max_temp = max->value;
+  int last_temp = p->value;
+  max->value = last_temp;
+  p->value = max_temp;
+}

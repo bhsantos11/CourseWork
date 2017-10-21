@@ -1,0 +1,28 @@
+void DB5_to_DB6(vector<list<int> *> &DB5, list<vector<int> *> &DB6){
+  vector<list<int> *>::iterator it1 = DB5.begin();
+  while(it1!= DB5.end()){
+    vector<int>* pv;// vector that is a copy of DB5 list that will be pushed into DB6
+    list<int>*::iterator it2 = it1.begin();
+    while(it2 != it1.end()){
+      pv.push_back(*it2) //*it2 is the integer pointer
+      it2++;
+    }// end of inner loop
+    DB6.push_back(pv); // pushing the pv vector into the DB6 list/
+    it1++;
+  }// end of outer while loop
+
+}
+
+void print_DB6(list<vector<int> *> &DB6){
+  list<vector<int> *>::iterator it1 = DB6.begin();
+  while(it1 != DB6.end()){// list iteration
+    vector<int> *::iterator it2 = it1.begin();
+    while(it2 != it2.end()) {//vector iteration
+      cout << *it2 << endl; // This will print all the numbers inside DB6 you could also format it so it would
+      // print in a format that would represent the data type
+      it2++
+    }
+    it1++;
+
+  }
+}

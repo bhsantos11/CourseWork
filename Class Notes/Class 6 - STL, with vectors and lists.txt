@@ -1,0 +1,61 @@
+//Standard Template Library (STL)
+//Container: vector, list, map, set, queue, stack, deque, etc.
+#include <iostream>
+#include <vector>
+#include <list>
+using namespace std;
+
+int main() {
+	vector<int> V1 = { 1,2,3,4,5 }, V2(5, 3), V3;//v2 of size 5 and initial value 3 for all 5 elements
+	V1[2] = 30;//vectors support random access
+	//cout << V1[5]; error! out of bound
+	int array1[10000];//system will allocate this much memory for array1
+	V1.push_back(7);//1,2,30,4,5,7; add 7 as the new element
+	cout << V1.size() << endl;//6
+	V1.pop_back();//remove the last element
+	cout << V1.size() << endl; //5
+	//vector allows dynamic size
+	for (size_t i = 0; i < V1.size(); i++) {//size_t is non-negative int, which size()return;
+		cout << V1[i] << endl;
+	}
+	list<int> L1 = { 1,2,3,4,5 };
+	L1.push_back(6);//add 6 to the end
+	L1.push_front(0);//add 0 to the front
+	L1.pop_back();//remove the last element
+	L1.pop_front();//remove the first element
+	cout << L1.size() << endl;//5
+	//list does not support random access []
+	//iterator is pointer used within STL
+	list<int>::iterator it1 = L1.begin();//it1 points to the first element
+	while (it1 != L1.end()) {
+		cout << *it1 << " ";
+		it1++;
+	}
+	vector<int>::iterator it2 = V1.begin();//it2 points to the first element
+	while (it2 != V1.end()) {
+		cout << *it2 << " ";
+		it2++;
+	}
+
+	it1 = find(L1.begin(), L1.end(), 2);//find returns position
+	L1.erase(it1);//remove the element at position it1
+	it1 = find(L1.begin(), L1.end(), 200);//it1 will be equal to L1.end()
+	if (it1 != L1.end()) L1.erase(it1);//you can remove element at  positon  end()
+
+
+	it2 = find(V1.begin(), V1.end(), 4);
+	if (it2 != V1.end()) V1.erase(it2);
+
+	//the following is only valid for list
+	L1.remove(1);//if 1 does not exist, it will do nothing
+
+
+	//begin() returns the position of first element
+	//end() returns the position after the last element
+
+	V3.assign(20, 8); //set the size of Vector V3 to 20, with inital values all equal to 8
+	cout << L1.empty() << endl;//return true or false
+	getchar();
+	getchar();
+	return 0;
+}

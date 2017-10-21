@@ -1,0 +1,41 @@
+
+//linked list reversal
+#include <iostream>
+#include <vector>
+#include <list>
+using namespace std;
+class C {
+public:
+
+	vector<int> v1;
+	list<int *> l1;
+	vector<int> *v2;
+	list<int *> *l2;
+	list<int> l3;
+	~C() {
+		//destructor
+
+		//v1 and l3 are local variables and will be taken care of by system.
+
+		//the following takes care of list<int *> l1;
+		list<int *>::iterator it1 = l1.begin();
+		while (it1 != l1.end()) {
+			delete *it1;
+			it1++;
+		}
+
+		//The following takes are of vector<int> *v2;
+		delete v2;
+
+		//the following takes care of list<int *> *l2;
+
+		list<int *>::iterator it2 = l2->begin();
+		while (it2 != l2->end()) {
+			delete *it2;
+			it2++;
+		}
+		delete l2;
+	}
+
+
+};

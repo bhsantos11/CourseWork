@@ -1,0 +1,73 @@
+*, ->, .
+
+a->b ->c
+a.b.b
+***p
+
+class A {
+public:
+B  a1;
+...
+}
+class B {
+public:
+C  *b1;
+...
+}
+
+class C {
+public:
+D c1;
+...
+}
+
+class D {
+public:
+int d1;
+
+}
+
+
+int main() {
+...
+A a;
+(a.a1->b1)->c1.d1 = 1000;
+
+}
+
+//******************
+int *** p;
+
+int i= 10;
+**p = &i;
+cout << ***p;
+int *p1 ;
+//array parament to a funciton always "call by refernece."
+
+// in STL it++ replaceds p = p->next
+//p = new int[25];     delete [] p;
+//p = new int;   delete p;
+
+**************
+
+int i = 10;
+int * p = &i;
+
+vs
+int * p = new int(10);
+
+//
+
+
+
+int k;
+cin >> k;
+int A[k];//error!! the size of any array has to be a constant
+
+int * A = new int[k];//no problem
+A[3] = 25;
+
+vector<int> V(k);//vector of size k
+
+
+Read from and write to a file;

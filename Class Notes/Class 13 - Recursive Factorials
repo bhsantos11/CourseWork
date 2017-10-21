@@ -1,0 +1,28 @@
+//more recursive calls
+#include <iostream>
+using namespace std;
+
+
+int  fac(int k) {
+	if (k == 0) return 1;
+	int result = 1;
+	for (int i = k; i >= 1; i--) {
+		result *= i;
+	}
+	return result;
+}
+
+int rec_fac(int k) {
+	if (k == 0) return 1;
+	return k* rec_fac(k - 1);
+}
+
+int main() {
+
+	cout << fac(10) << " " << rec_fac(10) << endl;
+
+	getchar();
+	getchar();
+	return 0;
+
+}

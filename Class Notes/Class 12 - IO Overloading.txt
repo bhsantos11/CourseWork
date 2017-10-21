@@ -1,0 +1,39 @@
+//overload operator << and opertaro >>
+#include <iostream>
+using namespace std;
+
+class ThreeD {
+public:
+	int ht;
+	int wid;
+	int dep;
+
+	ThreeD(int i, int j, int k) { ht = i; wid = j; dep = k; }
+	ThreeD(){}
+	friend ostream & operator<< (ostream & stream, ThreeD t);
+	friend istream & operator >> (istream & stream, ThreeD & t);
+};
+
+ostream & operator<< (ostream & stream, ThreeD t) {
+	stream << "(" << t.ht << "," << t.wid << "," << t.dep << ")";
+	return stream;
+}
+istream & operator >> (istream & stream, ThreeD & t) {
+	stream >> t.ht >> t.wid >> t.dep;
+	return stream;
+}
+
+
+int main() {
+
+	ThreeD t1(3, 4, 5), t2;
+
+	cout << t1 << endl;
+	cin >>t2;
+	cout << t2;
+
+
+	getchar();
+	getchar();
+	return 0;
+}

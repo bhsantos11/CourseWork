@@ -1,0 +1,51 @@
+#include<iostream>
+#include<list>
+#include<queue>
+#include<deque>
+#include<vector>
+using namespace std;
+
+
+
+void q_sort(vector<int> &v1, int i, int j);
+void main()
+{
+
+	vector<int> v = { 4,3,7,11,2,6,5 };
+	/*
+	v[0] = 4;
+	v[1] = 3;
+	v[2] = 7;
+	v[3] = 11;
+	v[4] = 2;
+	v[5] = 6;
+	v[6] = 5;
+	*/
+	q_sort(v, 0, 6);
+	for (int w = 0; w<7; w++) cout << v[w] << "   ";
+	vector<int> vv(100);
+	for (int w = 0; w<100; w++) vv[w] = 2 * (100 - w);
+	q_sort(vv, 0, 99);
+	cout << "\n\n";
+	for (int w = 0; w<100; w++) cout << vv[w] << "   ";
+	getchar();
+	return;
+
+}
+
+void q_sort(vector<int> &v1, int b, int e)
+{
+	if (b == e) return; // Base case (terminating case)
+	vector<int> v_temp(v1);
+	int l = b, u = e;
+	for (int k = b + 1; k <= e; k++)
+	{
+		if (v1[k] < v1[b]) { v_temp[l] = v1[k]; l++; }
+		else { v_temp[u] = v1[k]; u--; }
+	}
+	v_temp[l] = v1[b];
+	for (int k = b; k <= e; k++) v1[k] = v_temp[k];
+	if ((l != b) && (l - b > 1)) q_sort(v1, b, l - 1);
+	if ((u != e) && (e - u>1)) q_sort(v1, u + 1, e);
+	return;
+}

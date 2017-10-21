@@ -1,0 +1,128 @@
+//HW2: Sparse Vector Operation Due:
+#include <iostream>
+using namespace std;
+
+class element {
+public:
+
+	int value;
+	int position;
+	element * next;
+	element(int v, int p) { value = v; position = p; next = nullptr; }
+	element() { next = nullptr; }
+};
+
+class vector {
+public:
+	int vec_size;
+	int num_elements;
+	element * head;
+	vector() { num_elements = 0; vec_size = 0; head = nullptr; }
+	void add_element(int v, int p);
+	void print_vector();
+	void input_vector();
+	vector operator+ (vector &v);
+	int operator* (vector &v);
+};
+
+vector vector::operator+ (vector &v) {
+	element * p1 = head;
+	element * p2 = v.head;
+	vector temp;
+	while (p1 != nullptr || p2 != nullptr) {
+		if (p1 == nullptr) { temp.add_element(p2->value, p2->position); p2 = p2->next; }
+		else if (p2 == nullptr) { temp.add_element(p1->value, p1->position); p1 = p1->next; }
+		else if (p1->position < p2 -> position) { temp.add_element(p1->value, p1->position); p1 = p1->next; }
+		else if (p1->position > p2->position) { temp.add_element(p2->value, p2->position); p2 = p2->next; }
+		else if (p1->position == p2->position) {
+			if (p1->value + p2->value != 0) {
+				temp.add_element(p1->value + p2->value, p1->position);
+			}
+			p1 = p1->next;
+			p2 = p2->next;
+		}
+	}
+	return temp;
+}
+
+int vector::operator* (vector &v) {
+	element * p1 = head;
+	element * p2 = v.head;
+	int inner_product = 0;
+	while (p1 != nullptr && p2 != nullptr) {
+
+		 if (p1->position < p2->position) {  p1 = p1->next; }
+		else if (p1->position > p2->position) {  p2 = p2->next; }
+		else if (p1->position == p2->position) {inner_product += p1->value * p2->value;
+		p1 = p1->next; p2 = p2->next;
+	}
+return inner_product;
+}
+
+
+
+void vector::print_vector() {
+	element * p = head;
+	if (p == nullptr) return;
+	while (p != nullptr) {
+		cout << p->value << " " << p->position << "   ";
+		p = p->next;
+	}
+}
+
+void vector::add_element(int v, int p) {
+	element * p1 = new element(v, p);
+	if (head == nullptr) {
+		head = p1;
+		num_elements++;
+		return;
+	}
+
+	if (p < head->position) {
+		p1->next = head;
+		head = p1;
+		num_elements++;
+		return;
+	}
+
+	element * p2 = head;
+	while (p2->next != nullptr && !(p2->position < p && p2->next->position > p)) {
+		p2 = p2->next;
+	}
+	if (p2->next == nullptr) {
+		p2->next = p1;
+		num_elements++;
+		return;
+	}
+	p1->next = p2->next;
+	p2->next = p1;
+	num_elements++;
+}
+
+void vector::input_vector() {
+	int v_size, n_elements;
+	int v, p;
+	cout << "Enter vector size and  number of elements" << endl;
+	cin >> v_size >> n_elements;
+	vec_size = v_size;
+	for (int i = 0; i < n_elements; i++) {
+		cin >> v >> p;
+		add_element(v, p);
+	}
+}
+
+int main() {
+	vector v1, v2, v3;
+	v1.input_vector();
+	v1.print_vector();
+	v2.input_vector();
+	v2.print_vector();
+	v3 = v1 + v2;
+	cout << v1*v2;
+
+	getchar();
+	getchar();
+	return 0;
+
+
+}

@@ -1,0 +1,11 @@
+void print_fraction(int n){
+  if(n == 0){ return 0; }
+  if(n == 1){return 1;}
+  cout << print_fraction(n -2) << "/"<< print_fraction (n -1) << endl;
+  /*
+  Here my logic is that the number on the left if supposed to be smaller than
+  the number on the right, and that difference is supposed to be proportional to n
+  Since the number on the left is decreasing twice as fast it would be smaller than
+  the number on the right to a difference proportional to n.
+  */
+}

@@ -1,0 +1,46 @@
+//multiple-file program
+//main file
+#include <iostream>
+#include "Header1.h"
+
+//using namespace std;
+/*
+class A {
+public:
+	int a1;
+	int a2;
+	A() { a1 = a2 = 0; }
+	A(int i, int j) { a1 = i; a2 = j; }
+};
+*/
+
+int main() {
+
+	A A1(3, 4);
+	std::cout << A1.a1 << " " << A1.a2 << std::endl;
+	fun1(25);
+	std::cout << W << std::endl;
+	getchar();
+	getchar();
+	return 0;
+}
+
+
+
+//********** header file
+#include <iostream>
+#include <fstream>
+//using namespace std;
+
+int W = 200;
+class A {
+public:
+	int a1;
+	int a2;
+	A() { a1 = a2 = 0; }
+	A(int i, int j) { a1 = i; a2 = j; }
+};
+
+void fun1(int k) {
+	std::cout << k*k << std::endl;
+}

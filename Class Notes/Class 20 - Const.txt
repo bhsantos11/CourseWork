@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	const int c = 30;
+	//c = 31;  Error! c is const int
+	int i = 10;
+	//const int * p = &i; //The value pointed by p is const
+	int const * p = &i; //You can swap int with const
+	cout << *p << endl;
+	//*p = 11;  Error! The value pointed by p is const
+
+	int j = 20;
+	int * const p1 = &j; //The pointer itself is const
+	cout << *p1 << endl;
+	*p1 = 40;
+	cout << *p1 << endl;
+	//p1 = &i;  Error The pointer itself is const
+	int k = 200;
+	int const * const p2 = &k; //both the pointer and the value pointed by the pointer are const
+							   //you can rewrite in as const in ...
+	getchar();
+	getchar();
+	return 0;
+}

@@ -1,0 +1,126 @@
+Midterm Exam. CSE 283 Spring 2017
+Closed_book Exam.
+There are 5 Problems.
+
+//PROBLEM 1
+//Recursive (Hint:  Can you utilize the code in last quiz?)
+
+Write a function, which can invoke another function, to print the nth fraction (n = 0, 1, 2, 3, ) for the following sequence:
+
+0/1 1/2 3/5, 8/13, 21/34 .....
+
+void print_fraction(int n) { ...}
+
+print_fraction(0) will print "0/1"
+print_fraction(1) will print "1/2"
+print_fraction(2) will print "3/5"
+print_fraction(3) will print 8/13
+...
+
+/solution
+#include <iostream>
+using namespace std;
+
+int func1(int n) {
+	if (n == 0) return 0;
+	if (n == 1) return 1;
+	return func1(n - 1) + func1(n - 2);
+}
+
+//0, 1, 1, 2, 3, 5, 8, 13, 21, ....
+//func1(6) will return 8.
+
+void print_fraction(int n) {
+	cout << func1(2 * n) << "/" << func1(2 * n + 1) << endl;
+}
+
+int main() {
+
+	print_fraction(4);
+	getchar();
+	getchar();
+	return 0;
+
+}
+
+**************************
+
+//PROBLEM 2
+
+#include <iostream>
+#include <math.h> //sqrt
+using namespace std;
+
+class point {
+	double x;
+	double  y;
+	point() { x = y = 0.0;}
+	point(double i, double j) { x = i; y = j; }
+	bool operator==(point p) {
+return (sqrt ((x-p.x)*(x-p.x) + (y-p.y)*(y-p.y)) <= 2.5);
+
+}
+ //return true if the distance between nodes is less than or equal to 2.5
+
+
+//else return false
+};
+
+//**************  PROBLEM 2   ******************************
+//Write code for the above member function operator==
+//
+//You can use sqrt function.  sqrt(4.0) = 2.0;
+//****************
+
+
+
+******************************************
+//PROBLEM 3
+#include <iostream>
+using namespace std;
+
+class node {
+public:
+	int value;
+	node * next;
+	node() { next = nullptr; }
+	node(int v) { value = v; next = nullptr; }
+};
+class linked_list {
+public:
+	int num_nodes;
+	node * head;
+	linked_list() { num_nodes = 0; head = nullptr; }
+	void make_random_linked_list(int k);
+	void swap_max_last();
+};
+void linked_list::make_random_linked_list(int k) {//This member function creaates a linked list
+												  //of k nodes with each node having a random value between 0 and 99
+	node * p;
+	for (int i = 0; i < k; i++) {
+		p = new node(rand() % 100);//create a new node with random value between 0 and 99
+		p->next = head;
+		num_nodes++;
+		head = p;
+	}
+}
+
+void linked_list::swap_max_last() {
+	node * p = head, *p_max= head, *p_last;
+	int max = head->value;
+
+	while (p != nullptr) {
+		if (p->next == nullptr) p_last = p;
+		if (p->value > max) {
+			p_max = p;
+			max = p->value;
+		}
+		p = p->next;
+	}
+	p_max->value = p_last->value;
+	p_last->value = max;
+}
+
+//****************  PROBLEM 3  *************************************************************************************
+//Write code to swap the max value and with the last value in a linked_list, while the values of remaining nodes stay unchanged.
+//*******************************************************************************************************************

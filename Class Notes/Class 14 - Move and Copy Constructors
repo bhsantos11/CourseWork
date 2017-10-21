@@ -1,0 +1,67 @@
+#include <iostream>
+
+using namespace std;
+
+class big_array {
+public:
+	int size;
+	int * b_array;
+	//copy constructor:
+	//a left ref vesion function which decides how a copy is created
+
+	big_array(const big_array &b) {  //copy constructor
+		size = b.size;
+		b_array = new int[size];
+		for (int i = 0; i < size; i++) { b_array[i] = b.b_array[i]; }
+	}
+
+	big_array(big_array &&b) { //move constructor
+		size = b.size;
+		b_array = b.b_array;
+		b.b_array = nullptr;
+
+	}
+	void operator=(big_array &b){}
+	void operator=(big_array &&b) {}
+
+
+	//move constructor
+	//a right ref vesion function which decides how a copy is created
+
+
+
+
+	//destructor
+	~big_array() { delete[] b_array; }
+	big_array(int i) {
+		size = i;
+		b_array = new int[size];
+		for (int i = 0; i < size; i++) b_array[i] = 0;
+	}
+	big_array() { size = 0; b_array = nullptr; }
+
+	big_array  three_times() {
+		big_array temp(size);
+
+		for (int i = 0; i < size; i++) {
+			temp.b_array[i] = 3 * b_array[i];
+		}
+		return temp;
+	}
+};
+
+
+int main() {
+	big_array b1(10);
+	for (int i = 0; i < 10; i++) {
+		b1.b_array[i] = i;
+	}
+	big_array b2, b3;
+	b2 = b1;//operator=  left ref version
+	b3 = b1.three_times(); //operator= right ref version
+
+
+	getchar();
+	getchar();
+	return 0;
+}

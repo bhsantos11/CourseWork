@@ -1,0 +1,15 @@
+bool operator==(point p){
+  double x1 = x;
+  double x2 = p.x;
+  double y1 = y;
+  double y2 = p.y;
+
+  double x_dif = pow((x1 - x2), 2);
+  double y_dif = pow((y1 - y2), 2);
+
+  double r =  sqrt((x_dif + y_dif));
+  if(r>2.5) return false;
+  else return true;
+
+
+}

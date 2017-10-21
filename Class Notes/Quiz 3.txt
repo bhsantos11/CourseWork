@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+#include <list>
+using namespace std;
+
+void DB2_to_DB1(vector<list<int> *> &DB2, list<vector<int> > &DB1) {
+	vector<list<int> *>::iterator it1 = DB2.begin();
+	while (it1 != DB2.end()) {
+		vector<int> v;
+		list<int>::iterator it2 = (*it1)->begin();
+		while (it2 != (*it1)->end()) {
+			v.push_back(*it2);
+			it2++;
+		}
+		DB1.push_back(v);
+		it1++;
+	}
+
+}
+
+/* Alternatively, we can implement in the following manner
+void DB2_to_DB1(vector<list<int> *> &DB2, list<vector<int> > &DB1) {
+vector<list<int> *>::iterator it1 = DB2.begin();
+while (it1 != DB2.end()) {
+vector<int> * v = new vector<int>;
+list<int>::iterator it2 = (*it1)->begin();
+while (it2 != (*it1)->end()) {
+v->push_back(*it2);
+it2++;
+}
+DB1.push_back(*v);
+delete v;
+it1++;
+}
+
+}
+
+*/

@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+class ThreeD {
+public:
+	int ht;
+	int wid;
+	int dep;
+	//constructor
+	ThreeD(int i, int j, int k) { ht = i; wid = j; dep = k; }
+	ThreeD() {
+		ht = wid = dep = 0;
+	}
+	int vol() { return ht*wid*dep; }
+	//Operator overloading
+	ThreeD operator+(ThreeD &t) {
+		ThreeD temp;
+		temp.ht = ht + t.ht;
+		temp.wid = wid + t.wid;
+		temp.dep = dep + t.dep;
+		return temp;
+
+	}
+};
+
+int main() {
+
+	ThreeD t1(3, 4, 5);
+	ThreeD * p1 = &t1;
+	//The following three statements are equivalent.
+	cout << t1.vol() << endl;
+	cout << (*p1).vol() << endl;
+	cout << p1->vol() << endl;
+
+
+	//dynamic memory management
+	p1 = new ThreeD(10, 20, 30);
+	delete p1;//return the storage space pointed by p1
+
+	p1 = &t1;
+
+	//Dynamic allocation of array
+	ThreeD * p2 = new ThreeD[100];
+	p2->ht = 5;//first element of the array
+
+	p2[2].ht = 10;
+	cout << p2[2].ht << endl;
+
+
+
+	delete[] p2;
+
+	int A[5] = { 1,2,3,4,5 };
+	//A without index represents the address of A[0]
+	//That is, A is equivalent of &A[0]
+
+	cout << *A << endl;  //the same as cout << A[0] << endl;
+	cout << *(A + 2) << " " << A[2] << endl; //2[A] is also OK
+
+
+
+
+
+	ThreeD t2(5, 6, 7), t3(12, 13, 14), t4;
+	t4 = t2 + t3; //t4 = t2*t3;
+	cout << t4.ht << " " << t4.wid << " " << t4.dep << endl;
+	//The above is equivalent to t4 = t2.operator+(t3);
+
+
+	getchar();
+	getchar();
+	return 0;
+}

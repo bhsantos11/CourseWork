@@ -1,0 +1,43 @@
+// PROBLEM 1
+#include <iostream>
+#include <vector>
+#include <list>
+using namespace std;
+
+class example {
+public:
+    vector<int> * v1;
+    vector<int> v3;
+
+    //constructor
+    example(){
+        v1 = nullptr;
+    }
+
+    //copy constructor
+    example(const example &e){
+        // deep copying v1
+        vector<int>::iterator it1 = (e.*v1).begin(); // My thinking is that the * will deference the pointer
+        while(it1 != (e.*v1).end()){
+            (*v1).push_back(*it1);
+            it1++;
+        }// end of while
+
+        // deep copying v3
+        vector<int>::iterator it2 = e.v3.begin();
+        while(it2 != e.v3.end()){
+            v3.push_back(*it2);
+            it2++;
+        } // end of while
+
+        v3 = e.v3; // Its not a pointer so we don't have to iterate ??
+    }
+
+    //desctructor
+    ~example(){
+        // v3 is taken care of by default
+        // v1 is a pointer so we have to delete it
+        delete v1;
+    }
+
+};

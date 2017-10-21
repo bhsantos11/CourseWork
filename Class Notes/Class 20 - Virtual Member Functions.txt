@@ -1,0 +1,109 @@
+//inheritance
+#include <iostream>
+using namespace std;
+
+class A {
+private:
+	int A1;
+protected:
+	int A2;
+public:
+	int A3;
+	//once a member function is declared as virtual, it remains virtual throurghout the inheritance
+	//hierarchy
+	virtual int f1(int k) { cout << k; }// a virtual member function can be re-defined in
+	//derived class
+	virtual int f2(int k) = 0; //pure virtual function has to be defined in each derived class
+	//any class containing such pure virtual function(s) is referred to as an abstract class
+	//and cannot be used.  You are not allowed to declare any object of this class type
+};
+
+class B :public A {
+	//A: base class; B: derived class
+	//inheritance mode: public
+	//public members of base class become public members of derived class
+	//protected members of base class become protected member of derived class
+	//B has 5 members
+	//private: B1; protected: A2, B2;  public: A3, B3
+private:
+	int B1;
+protected:
+	int B2;
+public:
+	int B3;
+	void print() { cout << B2 << A2; }
+	virtual int f1(int k) { cout << k*k; }
+	virtual int f2(int k) { cout << k + 1 };
+};
+
+class C :protected A {
+	//inheritance mode: protected
+	//C has 5 members;
+	//private C1; protected: C2, A2, A3; public: C3
+	//both public and protected members of base class become protected in derived class
+private:
+	int C1;
+protected:
+	int C2;
+public:
+	int C3;
+};
+
+class D :private A {
+	//D has 5 members
+	//Private: D1, A2, A3; Protected: D2; Public: D3
+	//both Protected and Public members of base class become Private in derived class
+private:
+	int D1;
+protected:
+	int D2;
+public:
+	int D3;
+
+
+
+
+
+};
+
+
+int main() {
+	//A a1; Error! class A is abstract
+	B b1;
+	//C c1; Error! pure virtual function in A has to be defined in C
+
+
+	b1.A3 = 10;
+	b1.print();
+
+
+	A * p;
+	p = &a1;
+	p = &b1;
+	B * p1 = &b1;
+	cout << p1->B3;
+	//p1 = &a1;  Error
+
+
+	cout << p->A3;
+	//cout << p->B3; Error
+
+
+
+}
+/*
+
+#include <iostream>
+#include "Header1.h"
+using namespace std;
+
+int main(){
+
+int k = 10;
+A a1;
+a1.A1 = 10;
+cout << func1(k);
+cout << w;
+
+}
+*/

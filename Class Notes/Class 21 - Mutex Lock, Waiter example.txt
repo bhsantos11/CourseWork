@@ -1,0 +1,61 @@
+//Producer-Comsumer example
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+
+std::mutex mtx;
+std::condition_variable cv;
+
+int meal = 0;
+
+/* Consumer */
+void waiter(int ordernumber){
+  std::unique_lock<std::mutex> lck(mtx);
+  while(meal == 0) cv.wait(lck);
+  std::cout << "Order: ";
+  std::cout << ordernumber + 1 << " being taken care of with ";
+  std::cout << meal - 1 << " meals also ready." << std::endl;
+  meal--;
+}
+
+/* Producer */
+void makeMeal(int ordernumber){
+  std::unique_lock<std::mutex> lck(mtx);
+  meal++;
+  cv.notify_one();
+}
+
+int main(){
+
+  std::thread chefs[10];
+  std::thread waiters[10];
+
+  /* Initialize customers and cheifs */
+  for (int order = 0; order < 10; order++){
+    chefs[order] = std::thread(makeMeal, order);
+    waiters[order] = std::thread(waiter, order);
+  }
+
+  /* Join the threads to the main threads */
+  for (int order = 0; order < 10; order++) {
+    waiters[order].join();
+    chefs[order].join();
+  }
+
+  return 0;
+}
+/*
+Output:
+
+Order: 3 being taken care of 0 meals also ready.
+Order: 5 being taken care of with 0 meals also ready.
+Order: 2 being taken care of with 1 meals also ready.
+Order: 6 being taken care of with 0 meals also ready.
+Order: 7 being taken care of with 2 meals also ready.
+Order: 8 being taken care of with 2 meals also ready.
+Order: 9 being taken care of with 2 meals also ready.
+Order: 4 being taken care of with 2 meals also ready.
+Order: 10 being taken care of with 1 meals also ready.
+Order: 1 being taken care of with 0 meals also ready.
+*/

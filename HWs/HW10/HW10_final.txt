@@ -1,0 +1,206 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+class point {
+public:
+	int X;
+	int Y;
+	//constructors
+	point() {
+		X = 0;
+		Y = 0;
+	}
+	point(int x, int y) {
+		X = x;
+		Y = y;
+	}
+
+
+	// move constructor
+	point(const point &p) {
+		X = p.X;
+		Y = p.Y;
+	}
+
+	//member functions
+	void point_diplay() {
+		std::cout << '(' << X << ',' << Y << ')' << std::endl;
+	}
+
+	void move_up(int k) { // This function is to move the point k up
+		X += k;
+	}
+
+	void operator=(point &p) {
+		X = p.X;
+		Y = p.Y;
+
+	}
+	double line_length(point b) {
+		double x_dif = 0;
+		double y_dif = 0;
+		double len;
+
+		// If statements are used as you want subtract the smallest from the biggest so as not to have a negative length variable
+		if (X >= b.X) x_dif = X - b.X;
+		else x_dif = b.X - X;
+
+		if (Y >= b.Y) y_dif = Y - b.Y;
+		else y_dif = b.Y - Y;
+
+		x_dif = pow(x_dif, 2);
+		y_dif = pow(y_dif, 2);
+
+		len = sqrt((x_dif + y_dif));
+
+		return len;
+	}
+};
+
+class shape { // Abstract class
+public:
+	std::vector<point> points;
+
+	virtual double area() = 0;
+	virtual int perimeter() = 0;
+
+	void display_points() {
+		std::vector<point>::iterator it1 = points.begin();
+		while (it1 != points.end()) {
+			int count = 1;
+			std::cout << "Point" << count << ' ' << "X: " << it1->X << " Y: " << it1->Y << std::endl;
+			it1++;
+			count++;
+		}
+	}
+
+};
+
+class triangle :public shape {
+public:
+
+	// Member variables
+	point p1, p2, p3;
+	// a, b, and c are the sides of a triangle
+	double a, b, c;
+
+	// Constructor
+	triangle(point cp1, point cp2, point cp3) {
+		p1 = cp1;
+		p2 = cp2;
+		p3 = cp3;
+		points.push_back(p1);
+		points.push_back(p2);
+		points.push_back(p3);
+
+		a = p1.line_length(p2);
+		b = p2.line_length(p3);
+		c = p3.line_length(p1);
+
+	}
+
+	// Member functions
+
+	double area() {
+
+		// Below are equations used to find the area of a triangle
+		double s = (a + b + c) / 2;
+		double area = sqrt(s * (s - a)*(s - b)*(s - c));
+
+		return area;
+	}
+
+	int perimeter() {
+		int perimeter = a + b + c;
+		return perimeter;
+	}
+};
+
+class rectangle :public shape {
+public:
+	point tl, tr, bl, br;
+	int a, b, c, d;
+
+
+	rectangle(point p1, point p2, point p3, point p4) {
+		/* The idea here is to order these points so their variable names correspond
+		to their geometrical position */
+		// t stands for top, b for bottom, l for left, and r for right
+
+		tl = p1;
+		tr = p2;
+		bl = p3;
+		br = p4;
+
+		points.push_back(p1);
+		points.push_back(p2);
+		points.push_back(p3);
+		points.push_back(p4);
+
+		a = tl.line_length(tr);
+		b = tl.line_length(bl);
+		c = bl.line_length(br);
+		d = br.line_length(tr);
+
+	}
+
+	// Member functions
+	double area() {
+
+
+		return b * c;
+
+	}
+
+	int perimeter() {
+		return a + b + c + d;
+	}
+
+	// check function to check if points are in correct order
+	bool check(point p1, point p2, point p3, point p4) {
+		double r, l;
+		r = (p2.Y - p1.Y) / (p2.X - p1.X);
+		l = (p4.Y - p3.Y) / (p4.X - p3.X);
+		std::cout << "check flag " << (p2.Y - p1.Y) << std::endl;
+		if (r == l) return true;
+		else return false;
+	}
+
+	// function all sides of rectangle
+	void double_sides(){
+		tl.Y = tl.Y * 2;
+		br.X = br.X * 2;
+		tr.Y = tr.Y * 2;
+		tr.X = tr.X * 2;
+		a = tl.line_length(tr);
+		b = tl.line_length(bl);
+		c = bl.line_length(br);
+		d = br.line_length(tr);
+	}
+
+
+};
+
+
+int main() {
+	point p1(10, 30);
+	point p2(20, 30);
+	point p3(10, 5);
+	point p4(20, 5);
+	triangle t(p1, p2, p3);
+	rectangle r(p1, p2, p3, p4);
+
+
+	std::cout << r.area() << std::endl;
+	r.double_sides();
+	std::cout << r.area() << std::endl;
+
+
+	system("pause");
+	return 0;
+}
+
+// TO-DO
+// Learn how to implement virtual function
+// Implement function in point class that returns ints

@@ -1,0 +1,13 @@
+void remove_all(int k){
+  node * p = head, * p1;
+
+  while(p != nullptr){
+    while(p->value == k) p = p->next; // For all first items that are equal to k
+
+
+    p1 = p->next;
+    if (p1->value == k){p->next = p1->next;}
+    //  This will make p no longer point to p1 but to the one after p1
+    p = p->next;
+  }// end oof while loop
+}

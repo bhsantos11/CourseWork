@@ -1,0 +1,15 @@
+Operator overloading *, +, ==, < ,
+[](needs to return ref type for this), ++(both prefix and postfix
+
+General concepts of pointer, new, delete, array vs pointer
+
+Call by value vs call by ref
+
+STL (vector, list, map, stack, etc.): iterator, DB1_to_DB2, DB2_to_DB3, find, remove,
+sort, erase, operator==, operator<
+
+Recursive function calls
+
+linked_list operation
+
+Move & Copy constructors not included

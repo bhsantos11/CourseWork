@@ -1,0 +1,60 @@
+//HW4 initial code
+//Re-Do HW1 using vector/list  and map/list
+#include <iostream>
+#include <vector>
+#include <list>
+#include <map>
+#include <string>
+using namespace std;
+
+class course {
+public:
+	string name;
+	int section;
+	int credits;
+	course(string n, int s, int c) { name = n; section = s; credits = c; }
+	course() {}
+	bool operator==(course c) {}//to use find
+	bool operator<(course c) {}//to use sort
+
+
+};
+
+class student {
+public:
+	int ID;
+	list<course> LC;
+	student(int id) {
+		ID = id;
+	}
+	student() {}
+	bool operator==(student s) { return ID == s.ID; }
+	bool operator<(student s) {}
+};
+
+
+int main() {
+	course c("WRT205", 6, 3);
+	vector<student> DB1;
+	map<int, list<course> *> DB2;
+	//add a student with id = 21
+	student s(21);
+	DB1.push_back(s);
+	//add course c to student with id = 21
+	vector<student>::iterator it1;
+	it1 = find(DB1.begin(), DB1.end(), s);
+
+	it1->LC.push_front(c);
+
+
+
+	//to add a student with id 21
+	list<course> *p = new list<course>;
+	DB2[21] = p;
+	course c("WRT205", 6, 3);
+	DB2[21]->push_front(c);//add a course to student with id = 21
+
+
+	getchar();
+	getchar();
+}

@@ -1,0 +1,96 @@
+//inheritance
+#include <iostream>
+using namespace std;
+
+class A {
+private:
+	int A1;
+protected:
+	int A2;
+public:
+	int A3;
+
+};
+
+class B :public A {
+//A: base class; B: derived class
+	//inheritance mode: public
+	//public members of base class become public members of derived class
+	//protected members of base class become protected member of derived class
+	//B has 5 members
+	//private: B1; protected: A2, B2;  public: A3, B3
+private:
+	int B1;
+protected:
+	int B2;
+public:
+	int B3;
+	void print() { cout << B2 << A2; }
+};
+
+class C :protected A {
+//inheritance mode: protected
+	//C has 5 members;
+	//private C1; protected: C2, A2, A3; public: C3
+	//both public and protected members of base class become protected in derived class
+private:
+	int C1;
+protected:
+	int C2;
+public:
+	int C3;
+};
+
+class D :private A {
+	//D has 5 members
+	//Private: D1, A2, A3; Protected: D2; Public: D3
+	//both Protected and Public members of base class become Private in derived class
+private:
+	int D1;
+protected:
+	int D2;
+public:
+	int D3;
+
+
+};
+
+
+int main() {
+	A a1;
+	B b1;
+
+	b1.A3 = 10;
+	b1.print();
+
+
+	A * p;
+	p = &a1;
+	p = &b1;
+	B * p1 = &b1;
+	cout << p1->B3;
+	//p1 = &a1;  Error
+
+
+	cout << p->A3;
+	//cout << p->B3; Error
+
+
+
+}
+/*
+
+#include <iostream>
+#include "Header1.h"
+using namespace std;
+
+int main(){
+
+	int k = 10;
+	A a1;
+	a1.A1 = 10;
+	cout << func1(k);
+	cout << w;
+
+}
+*/
