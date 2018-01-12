@@ -1,0 +1,61 @@
+"C:\Program Files\Java\jdk1.8.0_144\bin\java" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2017.2.2\lib\idea_rt.jar=54759:C:\Program Files\JetBrains\IntelliJ IDEA 2017.2.2\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files\Java\jdk1.8.0_144\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\rt.jar;C:\Users\bhsantos\Google Drive\Syracuse\CIS 351\Project Files\HWs\HW7\out\production\HW7" Test5
+Console output is saving to: C:\Users\bhsantos\Google Drive\Syracuse\CIS 351\Project Files\HWs\HW7\HW7Upload
+
+
+*** Testing for splitAt
+
+Starting with lst = [a, b, c, d, e], lst.splitAt(0) returns [] and lst becomes [a, b, c, d, e]  Check!
+Starting with lst = [a, b, c, d, e], lst.splitAt(1) returns [a] and lst becomes [b, c, d, e]  Check!
+Starting with lst = [b, c, d, e], lst.splitAt(3) returns [b, c, d] and lst becomes [e]  Check!
+Starting with lst = [e], lst.splitAt(27) returns [e] and lst becomes []  Check!
+Starting with lst = [], lst.splitAt(-1) returns [] and lst becomes []  Check!
+Starting with lst = [1, 2, 3, 4, 5, 6, 7, 8], lst.splitAt(2) returns [1, 2] and lst becomes [3, 4, 5, 6, 7, 8]  Check!
+Starting with lst = [3, 4, 5, 6, 7, 8], lst.splitAt(20) returns [3, 4, 5, 6, 7, 8] and lst becomes []  Check!
+
+
+*** Testing for reverseCopy
+
+Starting with lst = [], lst.reverseCopy() returns [] and lst becomes []  Check!
+Starting with lst = [X], lst.reverseCopy() returns [X] and lst becomes [X]  Check!
+Starting with lst = [A, Z], lst.reverseCopy() returns [Z, A] and lst becomes [A, Z]  Check!
+Starting with lst = [d, u, n, d, e, r, p, a, t, e], lst.reverseCopy() returns [e, t, a, p, r, e, d, n, u, d] and lst becomes [d, u, n, d, e, r, p, a, t, e]  Check!
+Starting with lst = [1, 1, 1, 1, 1], lst.reverseCopy() returns [1, 1, 1, 1, 1] and lst becomes [1, 1, 1, 1, 1]  Check!
+Starting with lst = [-, 1, -, 1], lst.reverseCopy() returns [1, -, 1, -] and lst becomes [-, 1, -, 1]  Check!
+Starting with lst = [@], lst.reverseCopy() returns [@] and lst becomes [@]  Check!
+
+
+*** Testing for reverse
+
+Starting with lst = [], after lst.reverse() lst becomes []  Check!
+Starting with lst = [X], after lst.reverse() lst becomes [X]  Check!
+Starting with lst = [A, Z], after lst.reverse() lst becomes [Z, A]  Check!
+Starting with lst = [d, u, n, d, e, r, p, a, t, e], after lst.reverse() lst becomes [e, t, a, p, r, e, d, n, u, d]  Check!
+Starting with lst = [1, 1, 1, 1, 1], lst.reverseCopy() returns [1, 1, 1, 1, 1] and lst becomes [1, 1, 1, 1, 1]  Check!
+Starting with lst = [-, 1, -, 1], lst.reverseCopy() returns [1, -, 1, -] and lst becomes [-, 1, -, 1]  Check!
+Starting with lst = [@], lst.reverseCopy() returns [@] and lst becomes [@]  Check!
+
+
+*** Testing for merge
+
+Starting with lst1 = [] and lst2 = [] merge(lst1,lst2) returns []  Check!
+Starting with lst1 = [2, 4, 8] and lst2 = [] merge(lst1,lst2) returns [2, 4, 8]  Check!
+Starting with lst1 = [] and lst2 = [2, 4, 8] merge(lst1,lst2) returns [2, 4, 8]  Check!
+Starting with lst1 = [2, 4, 8] and lst2 = [1, 9] merge(lst1,lst2) returns [1, 2, 4, 8, 9]  Check!
+Starting with lst1 = [2, 4, 8] and lst2 = [1, 3, 6, 9] merge(lst1,lst2) returns [1, 2, 3, 4, 6, 8, 9]  Check!
+Starting with lst1 = [] and lst2 = [] merge(lst1,lst2) returns []  Check!
+Starting with lst1 = [4] and lst2 = [] merge(lst1,lst2) returns [4]  Check!
+Starting with lst1 = [0] and lst2 = [1] merge(lst1,lst2) returns [0, 1]  Check!
+
+
+*** Testing for mergesort
+
+Starting with lst = [] mergesort(lst) returns []  Check!
+Starting with lst = [2] mergesort(lst) returns [2]  Check!
+Starting with lst = [1, 2, 3, 4, 5, 6, 7] mergesort(lst) returns [1, 2, 3, 4, 5, 6, 7]  Check!
+Starting with lst = [7, 6, 5, 4, 3, 2, 1] mergesort(lst) returns [1, 2, 3, 4, 5, 6, 7]  Check!
+Starting with lst = [4, 1, 7, 6, 5, 3, 2] mergesort(lst) returns [1, 2, 3, 4, 5, 6, 7]  Check!
+Starting with lst = [15, 16, 17, 18] mergesort(lst) returns [15, 16, 17, 18]  Check!
+Starting with lst = [17, 18, 16, 15] mergesort(lst) returns [15, 16, 17, 18]  Check!
+Starting with lst = [9999] mergesort(lst) returns [9999]  Check!
+
+Process finished with exit code 0

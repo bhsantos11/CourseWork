@@ -1,0 +1,93 @@
+*** Preliminary messing about
+sl1 = [a,b,c,d,e]
+sl2 = [f,g,h,i,j]
+a  b  c  d  e  concatenate to abcde
+
+*** Testing addAll 
+
+For lst = [a,b,c,d,e] and arg = [f,g,h,i,j]:
+  after lst.addAll(arg), lst =[a,b,c,d,e,f,g,h,i,j] Check!
+For lst = [] and arg = [f,g,h,i,j]:
+  after lst.addAll(arg), lst =[f,g,h,i,j] Check!
+For lst = [a,b,c,d,e] and arg = []:
+  after lst.addAll(arg), lst =[a,b,c,d,e] Check!
+
+
+*** Testing for contains
+
+ Checking a	Check!
+ Checking b	Check!
+ Checking c	Check!
+ Checking d	Check!
+ Checking e	Check!
+ Checking f	Check!
+ Checking g	Check!
+ Checking h	Check!
+ Checking i	Check!
+ Checking j	Check!
+ Checking k	Check!
+ Checking l	Check!
+ Checking m	Check!
+ Checking n	Check!
+ Checking o	Check!
+ Checking p	Check!
+ Checking q	Check!
+ Checking r	Check!
+ Checking s	Check!
+ Checking t	Check!
+ Checking u	Check!
+ Checking v	Check!
+ Checking w	Check!
+ Checking x	Check!
+ Checking y	Check!
+ Checking z	Check!
+
+
+*** Testing for locationsOf
+
+locationsOf says the locations of z in [] are []  Check!
+locationsOf says the locations of z in [a,b,c,d,e] are []  Check!
+locationsOf says the locations of a in [a,b,c,d,e] are [0]  Check!
+locationsOf says the locations of b in [a,b,c,d,e] are [1]  Check!
+locationsOf says the locations of c in [a,b,c,d,e] are [2]  Check!
+locationsOf says the locations of d in [a,b,c,d,e] are [3]  Check!
+locationsOf says the locations of e in [a,b,c,d,e] are [4]  Check!
+locationsOf says the locations of z in [a,b,c,d,e,a,b,c,d,e] are []  Check!
+locationsOf says the locations of a in [a,b,c,d,e,a,b,c,d,e] are [0,5]  Check!
+locationsOf says the locations of b in [a,b,c,d,e,a,b,c,d,e] are [1,6]  Check!
+locationsOf says the locations of c in [a,b,c,d,e,a,b,c,d,e] are [2,7]  Check!
+locationsOf says the locations of d in [a,b,c,d,e,a,b,c,d,e] are [3,8]  Check!
+locationsOf says the locations of e in [a,b,c,d,e,a,b,c,d,e] are [4,9]  Check!
+
+
+*** Testing for drop
+
+Starting with lst = [a,b,c,d,e], lst.drop(0) results with lst = [a,b,c,d,e]  Check!
+Starting with lst = [a,b,c,d,e], lst.drop(1) results with lst = [b,c,d,e]  Check!
+Starting with lst = [b,c,d,e], lst.drop(3) results with lst = [e]  Check!
+Starting with lst = [e], lst.drop(27) results with lst = []  Check!
+Starting with lst = [], lst.drop(27) results with lst = []  Check!
+
+
+*** Testing for splitAt
+
+Starting with lst = [a,b,c,d,e], lst.splitAt(0) returns [] and lst becomes [a,b,c,d,e]  Check!
+Starting with lst = [a,b,c,d,e], lst.splitAt(1) returns [a] and lst becomes [b,c,d,e]  Check!
+Starting with lst = [b,c,d,e], lst.splitAt(3) returns [b,c,d] and lst becomes [e]  Check!
+Starting with lst = [e], lst.splitAt(27) returns [e] and lst becomes []  Check!
+
+
+*** Testing for reverseCopy
+
+Starting with lst = [], lst.reverseCopy() returns [] and lst becomes []  Check!
+Starting with lst = [X], lst.reverseCopy() returns [X] and lst becomes [X]  Check!
+Starting with lst = [A,Z], lst.reverseCopy() returns [Z,A] and lst becomes [A,Z]  Check!
+Starting with lst = [d,u,n,d,e,r,p,a,t,e], lst.reverseCopy() returns [e,t,a,p,r,e,d,n,u,d] and lst becomes [d,u,n,d,e,r,p,a,t,e]  Check!
+
+
+*** Testing for reverse
+
+Starting with lst = [], after lst.reverse() lst becomes []  Check!
+Starting with lst = [X], after lst.reverse() lst becomes [X]  Check!
+Starting with lst = [A,Z], after lst.reverse() lst becomes [Z,A]  Check!
+Starting with lst = [d,u,n,d,e,r,p,a,t,e], after lst.reverse() lst becomes [e,t,a,p,r,e,d,n,u,d]  Check!

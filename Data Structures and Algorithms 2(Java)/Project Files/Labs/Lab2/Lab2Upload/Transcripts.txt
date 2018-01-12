@@ -1,0 +1,42 @@
+// Lines1 Transcript
+
+/* RUN 1 */
+Enter four numbers: 3 4 3 100
+Sorry can't do it.
+Process finished with exit code 0
+
+/* RUN 2 */
+Enter four numbers: 3 5 3 5
+Sorry can't do it.
+Process finished with exit code 0
+
+/* RUN 3 */
+Enter four numbers: 0 0 5 5
+The slope of the line passing through (0.0, 0.0) and (5.0, 5.0) is 1.0.
+Process finished with exit code 0
+
+// Lines2 Transcript
+
+/* RUN 1 */
+Enter four numbers: 3 3 3 3
+Sorry can't do it.
+Try again.
+Enter four numbers: 3 3 3 3
+Sorry, too many bad inputs
+
+Process finished with exit code 0
+
+/* RUN 2 */
+Enter four numbers: 3 3 3 3
+Sorry can't do it.
+Try again.
+Enter four numbers: 0 0 5 5
+The slope of the line passing through (0.0, 0.0) and (5.0, 5.0) is 1.0.
+
+Process finished with exit code 0
+
+/* RUN 3 */
+Enter four numbers: 0 0 5 5
+The slope of the line passing through (0.0, 0.0) and (5.0, 5.0) is 1.0.
+
+Process finished with exit code 0
