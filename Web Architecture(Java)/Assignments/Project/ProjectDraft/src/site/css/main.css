@@ -1,0 +1,57 @@
+/*
+	Maester
+	Prototype A.0
+	Mobile First Approach
+	*/
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+/* HTML Tags*/
+:root{
+    --mBlue; #011627;
+    --powder: #FDFFFC;
+    --blueGreen: #2EC4B6;
+    --grey: #FFF;
+
+}
+body {
+    font-family: 'Raleway', monospace;
+    background-color: var(--blueGreen);
+}
+
+/* Class Selectors */
+.function-div{
+    font-size: 3em;
+    text-align: center;
+    margin-top: 5vh;
+}
+
+/* ID Selectors */
+#title{
+    text-align: center;
+    background-color: var(--powder);
+    color: var(--mBlue);
+    font-size: 5em;
+    margin: 0 auto;
+
+}
+
+#function-select{
+    display: flex;
+}
+
+#initial-display{
+    font-size: 6em;
+    text-align: center;
+    padding-top: 20vh;
+}
+
+#function-select div{
+    background-color: var(--powder);
+    flex-grow: 1;
+    flex-basis: auto;
+    text-align: center;
+
+    font-size: 2em;
+
+}
+

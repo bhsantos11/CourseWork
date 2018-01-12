@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Account Management Page</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+    <!--<link rel="stylesheet" href="css/main.css"> Figure out how to implement external css-->
+    <!--Temporary Fix, later have css in separate file-->
+    <style media="screen" type="text/css">
+        body {
+            background-color: #C0DEED;
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        #overlay{
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: auto;; /* only one column*/
+            grid-template-rows: 25% 5% auto; /*One row for add, one for space, rest for accounts*/
+        }
+
+        #addAccount{
+            border: 1px grey;
+            grid-row-start: 1;
+            grid-row-end: 2;
+            grid-column: auto;
+        }
+
+        #accounts{
+            border: 1px grey;
+            grid-row-start: 3;
+            grid-column: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        #accounts button{
+            display: block;
+            flex-basis: 1;
+            text-align: left;
+            padding: 3px 0;
+            width: 10vw;
+        }
+
+    </style>
+</head>
+<body>
+<!-- Overlay is a grid -->
+<div id="overlay">
+
+    <div id="addAccount">
+        <h2>Add an account here!</h2>
+        <form>
+            <input id="account" type="text" name="accountName">
+            <button formaction="http://localhost:309/" formmethod="post" name="accountName" type="submit"> +</button>
+        </form>
+
+
+    </div>
+
+    <!-- Accounts will dynamically be added in depending on the user's db, will be divs -->
+    <div id="accounts">
+        Accounts being watched will go here.
+        <button onclick="location.href = 'realDonaldTrump';" >realDonaldTrump</button>
+        <button onclick="location.href = 'bbhauers';" >bbhauers</button>
+        <button onclick="location.href = 'Twitter';" >Twitter</button>
+
+    </div>
+
+
+</div>
+</body>
+
+</html>
